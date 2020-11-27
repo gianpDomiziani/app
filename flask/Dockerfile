@@ -1,10 +1,13 @@
-FROM python:3.8-slim-buster
+FROM ubuntu:20.04
 MAINTAINER Gian Pio Domiziani
+
+RUN apt-get update -y
+RUN apt install -y python3-pip
 
 WORKDIR /app
 # add all flask's contents in workdir
 ADD . /app
+RUN pip3 install uwsgi
 RUN pip3 install -r requirements.txt
 # try to install uwsgi directly inside docker container
-RUN pip3 install uwsgi
-CMD ['uwsgi', 'app.ini']
+CMD ["uwsgi", "app.ini"]
