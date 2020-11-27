@@ -4,7 +4,7 @@ import csv
 import os
 
 fieldsname = ['date', 'time', 'ip']
-with open('../logs/ip.csv', 'w+') as f:
+with open('logs/ip.csv', 'w+') as f:
     writer = csv.DictWriter(f, fieldnames=fieldsname)
     writer.writeheader()
 
@@ -18,7 +18,7 @@ def index():
     day = datetime.strftime(moment, '%d/%m/%y')
     instant = datetime.strftime(moment, '%H:%M:%S:%f')
     payload = {'date': day, 'time': instant, 'ip': ip}
-    with open('../logs/ip.csv', 'a+', newline='') as f:
+    with open('logs/ip.csv', 'a+', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldsname)
         writer.writerow(payload)
     return f'Welcome to {app_name}!'
